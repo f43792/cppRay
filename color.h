@@ -1,18 +1,37 @@
-#ifndef __color_h__
+#ifndef __colo_h__
 #define __color_h__
 
-#include <cmath>
+class Color {
+    double m_red, m_green, m_blue, m_special;
+    public:
+    Color();
+    Color(double, double, double, double);
 
-struct Color{
-    float r;
-    float g;
-    float b;
+    double getRed() { return m_red; }
+    double getGreen() { return m_green; }
+    double getBlue() { return m_blue; }
+    double getSpecial() { return m_special; }
+    // double[] getAll() { return [x, y, z]; }
 
-    void clamp(float min = 0.0f, float max = 255.0f) {
-        r = std::max(min, std::min(max, r));
-        g = std::max(min, std::min(max, g));
-        b = std::max(min, std::min(max, b));
-    }
+    double setRed(double value) { m_red = value; };
+    double setGreen(double value) { m_green = value; };
+    double setBlue(double value) { m_blue = value; };
+    double setSpecial(double value) { m_special = value; };
 };
+
+Color::Color () {
+    // Default color is gray
+    m_red = 0.5;
+    m_green = 0.5;
+    m_blue = 0.5;
+}
+
+Color::Color(double r, double g, double b, double s) {
+    m_red = r;
+    m_green = g;
+    m_blue = b;
+    m_special = s;
+}
+
 
 #endif

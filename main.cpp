@@ -1,11 +1,13 @@
 #include <iostream>
 
-#include "color.h"
+#include "pixelinfo.h"
 #include "ppmutil.cpp"
 
 #include "vect.h"
 #include "ray.h"
 #include "camera.h"
+// #include "color.h"
+#include "light.h"
 
 using namespace std;
 
@@ -15,7 +17,7 @@ int main(int argc, char *argv[]){
     int margin = 32;
     cout << "\nRendering [" << width << ", " << height << "]..."; cout.flush();
     // int n = width * height;
-    Color *pixels = new Color[width * height];
+    PixelInfo *pixels = new PixelInfo[width * height];
 
     Vect X(1, 0, 0);
     Vect Y(0, 1, 0);
@@ -31,8 +33,16 @@ int main(int argc, char *argv[]){
 
     Camera scene_cam(campos, camdir, camright, camdown);
 
+    Color white_light (1.0, 1.0, 1.0, 0.0);
+    Color pretty_green (0.5, 1.0, 0.5, 0.3);
+    Color gray (0.5, 0.5, 0.5, 0.0);
+    Color black (0.0, 0.0, 0.0, 0.0);
+
+    Vect light_pos (-7, 10, -10);
+    Light scene_light (light_pos, white_light);
+
     // Stop here!
-    // https://youtu.be/sEdvjkFMTw4?list=PLHm_I0tE5kKPPWXkTTtOn8fkcwEGZNETh&t=2042
+    // https://youtu.be/4apLfBb9rbE?list=PLHm_I0tE5kKPPWXkTTtOn8fkcwEGZNETh&t=2
 
     int idx;
     for(int x = 0; x < width; x++){

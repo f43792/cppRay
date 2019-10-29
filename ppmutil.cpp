@@ -5,11 +5,11 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "color.h"
+#include "pixelinfo.h"
 
 using namespace std;
 
-void saveppm(const char *filename, int w, int h, Color *data){
+void saveppm(const char *filename, int w, int h, PixelInfo *data){
     size_t kWidth = w;
     size_t kHeight = h;
     size_t area = kWidth * kHeight;
@@ -23,7 +23,7 @@ void saveppm(const char *filename, int w, int h, Color *data){
 
     for(int i=0; i < area; i++){
         unsigned char r, g, b;
-        Color pixel = data[i];
+        PixelInfo pixel = data[i];
         pixel.clamp();
         r = static_cast<unsigned char>(pixel.r);
         g = static_cast<unsigned char>(pixel.g);
