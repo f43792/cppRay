@@ -4,15 +4,16 @@
 #include "vect.h"
 
 class Camera {
-    Vect m_pos, m_dir, m_right, m_down;
+    private:
+        Vect m_pos, m_dir, m_right, m_down;
     public:
-    Camera();
-    Camera(Vect, Vect, Vect, Vect);
+        Camera();
+        Camera(Vect, Vect, Vect, Vect);
 
-    Vect getPosition() { return m_pos; }
-    Vect getDirection() {return m_dir; }
-    Vect getRight() {return m_right; }
-    Vect getDown() {return m_down; }
+        Vect getPosition() { return m_pos; }
+        Vect getDirection() {return m_dir; }
+        Vect getRight() {return m_right; }
+        Vect getDown() {return m_down; }
 };
 
 Camera::Camera () {

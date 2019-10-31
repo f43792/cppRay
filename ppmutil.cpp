@@ -21,9 +21,10 @@ void saveppm(const char *filename, int w, int h, PixelInfo *data){
 
     fileStream << headerStream.str();
 
+    PixelInfo pixel;
     for(int i=0; i < area; i++){
         unsigned char r, g, b;
-        PixelInfo pixel = data[i];
+        pixel = data[i];
         pixel.clamp();
         r = static_cast<unsigned char>(pixel.r);
         g = static_cast<unsigned char>(pixel.g);

@@ -4,19 +4,20 @@
 #include <math.h>
 
 class Vect {
-    double m_x, m_y, m_z;
+    private:
+        double m_x, m_y, m_z;
     public:
-    Vect();
-    Vect(double, double, double);
+        Vect();
+        Vect(double, double, double);
 
-    double getX() { return m_x; }
-    double getY() { return m_y; }
-    double getZ() { return m_z; }
-    // double[] getAll() { return [x, y, z]; }
+        double getX() { return m_x; }
+        double getY() { return m_y; }
+        double getZ() { return m_z; }
+        // double[] getAll() { return [x, y, z]; }
 
 
-    double magnitude() {
-        return sqrt((m_x*m_x) + (m_y*m_y) + (m_z*m_z));
+        double magnitude() {
+            return sqrt((m_x*m_x) + (m_y*m_y) + (m_z*m_z));
     }
 
     Vect normalize() {
@@ -58,9 +59,6 @@ class Vect {
     Vect div(Vect v) {
         return Vect(m_x/v.getX(), m_y/v.getY(), m_z/v.getZ());
     }
-
-
-
 
 };
 

@@ -4,9 +4,10 @@
 #include <cmath>
 
 struct PixelInfo{
-    float r;
-    float g;
-    float b;
+    public:
+        float r;
+        float g;
+        float b;
 
     void clamp(float min = 0.0f, float max = 255.0f) {
         r = std::max(min, std::min(max, r));
