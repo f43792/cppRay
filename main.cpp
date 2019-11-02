@@ -39,7 +39,54 @@ void fillBase(int w, int h, int m, PixelInfo *pixels) {
     }
 }
 
-void render(int w, int h, double ar, Camera cam, PixelInfo *pixels) {
+int winningObjectIndex(vector<double> object_intersections) {
+    // return the index of the intersection
+    int idx_min_value;
+
+    // Prevent unnessessary calculations
+    if (object_intersections.size() == 0) {
+        // if there no intersections
+        cout << "no intersection" << endl;
+        return -1;
+    } else if (object_intersections.size() == 1) {
+        // Just one intersection
+        if (object_intersections.at(0) > 0) {
+            // If that intersection is greather than 0, them it's
+            return 0;
+        } else {
+            // Otherwise the only value is negative
+            cout << "only value is negative" << endl;
+            return -1;
+        }
+    } else {
+        // otherwise there is more than one intersection
+        // Verify the maximum value in the vector
+        double max = 0;
+        for (int i = 0; i < object_intersections.size(); i++) {
+            if (max < object_intersections.at(i)) {
+                max = object_intersections.at(i);
+            }
+        }
+        // Then starting from the maximum value, find the minimum
+        if (max > 0){
+            // Only positive intersections
+            for (int idx = 0; idx < object_intersections.size(); idx++) {
+                if (object_intersections.at(idx) > 0 && object_intersections.at(idx) <= max) {
+                    max = object_intersections.at(idx);
+                    idx_min_value = idx;
+                }
+            }
+            return idx_min_value;
+        } else {
+            // All intersections are negative
+            cout << "all intersections are negative" << endl;
+            return -1;
+        }
+        
+    }
+}
+
+void render(int w, int h, double ar, Camera cam, PixelInfo *pixels, vector<Object*> objects) {
     int idx;
     int width = w;
     int height = h;
@@ -74,6 +121,14 @@ void render(int w, int h, double ar, Camera cam, PixelInfo *pixels) {
             Ray cam_ray(cam_ray_origin, cam_ray_direction);
 
             vector<double> intersections;
+
+            for (int idx = 0; idx < objects.size(); idx++) {
+                intersections.push_back(objects.at(idx)->findIntersection(cam_ray));
+            }
+
+            int idx_objs = winningObjectIndex(intersections);
+
+            if (idx_objs >= 0) cout << "winning obj: " << idx_objs << endl;
 
         }
     }
@@ -124,10 +179,10 @@ int main(int argc, char *argv[]){
 
 
     // Stop here!
-    // https://youtu.be/AARMPhL9d6g?list=PLHm_I0tE5kKPPWXkTTtOn8fkcwEGZNETh
+    // https://youtu.be/vE5c2hTRLZM?list=PLHm_I0tE5kKPPWXkTTtOn8fkcwEGZNETh&t=2
 
     //fillBase(width, height, margin, pixels);
-    render(width, height, aspectRatio, scene_cam, pixels);
+    render(width, height, aspectRatio, scene_cam, pixels, scene_objects);
 
     saveppm("scene.ppm", width, height, pixels);
     cout << "OK\n" << endl;
