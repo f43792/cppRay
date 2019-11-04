@@ -1,7 +1,8 @@
 #ifndef __plane_h__
 #define __plane_h__
 
-#include <cmath>
+//#include <cmath>
+#include <iostream>
 #include "object.h"
 #include "vect.h"
 #include "color.h"
@@ -15,11 +16,12 @@ class Plane : public Object {
         Plane();
         Plane(Vect, double, Color);
 
-        Vect getNormal() { return m_normal; }
-        Color getColor() {return m_color; }
-        double getDistance() {return m_distance; }
+        Vect getNormal() { return m_normal;}
+        Color getColor() {return m_color;}
+        double getSize() {return m_distance;}
 
         Vect getNormalAt(Vect point) {
+            // On plane, the normal is the same around every places.
             return m_normal;
         }
 
@@ -33,9 +35,10 @@ class Plane : public Object {
                 return -1.0;
             } else {
                 double b = m_normal.dotProduct(ray.getOrigin().add(m_normal.mult(m_distance).negative()));
-                return -1*b/a;
+                double distance = -1*b/a;
+                // std::cout << distance << endl;
+                return distance;
             }
-
         }
 
 };
@@ -46,10 +49,10 @@ Plane::Plane () {
     m_distance = 1.0;
 }
 
-Plane::Plane(Vect pos, double rad, Color col) {
-    m_normal = pos;
-    m_color = col;
-    m_distance = rad;
+Plane::Plane(Vect normalValue, double distanceValue, Color colorValue) {
+    m_normal = normalValue;
+    m_color = colorValue;
+    m_distance = distanceValue;
 }
 
 

@@ -14,6 +14,12 @@ struct PixelInfo{
         g = std::max(min, std::min(max, g));
         b = std::max(min, std::min(max, b));
     }
+
+    void multiply(float value) {
+        r *= value;
+        g *= value;
+        b *= value;
+    }
 };
 
 #endif

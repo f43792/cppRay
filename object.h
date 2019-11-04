@@ -15,8 +15,8 @@ class Object {
         // Object(Vect, double, Color);
 
         // Vect getPosition() { return m_center; }
-        Color getColor() {return Color(0.0, 0.0, 0.0, 0); }
-        double findIntersection(Ray ray) {
+        virtual Color getColor() {return Color(0.0, 0.0, 0.0, 0); }
+        virtual double findIntersection(Ray ray) {
             return 0;
         }
 };

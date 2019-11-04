@@ -21,8 +21,8 @@ class Vect {
     }
 
     Vect normalize() {
-        // double magnitude = sqrt((m_x*m_x) + (m_y*m_y) + (m_z*m_z));
-        double magnitude = this->magnitude();
+        double magnitude = sqrt((m_x*m_x) + (m_y*m_y) + (m_z*m_z));
+        // double magnitude = this->magnitude();
         return Vect(m_x / magnitude, m_y / magnitude, m_z / magnitude);
     }
 
@@ -52,13 +52,13 @@ class Vect {
         return Vect(m_x*scalar, m_y*scalar, m_z*scalar);
     }
 
-    Vect mult(Vect v) {
-        return Vect(m_x*v.getX(), m_y*v.getY(), m_z*v.getZ());
-    }
+    // Vect mult(Vect v) {
+    //     return Vect(m_x*v.getX(), m_y*v.getY(), m_z*v.getZ());
+    // }
 
-    Vect div(Vect v) {
-        return Vect(m_x/v.getX(), m_y/v.getY(), m_z/v.getZ());
-    }
+    // Vect div(Vect v) {
+    //     return Vect(m_x/v.getX(), m_y/v.getY(), m_z/v.getZ());
+    // }
 
 };
 

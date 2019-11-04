@@ -5,14 +5,15 @@
 #include "color.h"
 
 class Light {
-    Vect m_position;
-    Color m_color;
+    private:
+        Vect m_position;
+        Color m_color;
     public:
-    Light();
-    Light(Vect, Color);
+        Light();
+        Light(Vect, Color);
 
-    Vect getPosition() { return m_position; }
-    Color getColor() {return m_color; }
+        Vect getPosition() { return m_position; }
+        Color getColor() {return m_color; }
 };
 
 Light::Light () {

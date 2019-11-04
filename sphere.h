@@ -1,7 +1,7 @@
 #ifndef __sphere_h__
 #define __sphere_h__
 
-#include <cmath>
+// #include <cmath>
 #include "object.h"
 #include "vect.h"
 #include "color.h"
@@ -15,9 +15,9 @@ class Sphere : public Object {
         Sphere();
         Sphere(Vect, double, Color);
 
-        Vect getPosition() { return m_center; }
-        Color getColor() {return m_color; }
+        Vect getCenter() { return m_center; }
         double getRadius() {return m_radius; }
+        Color getColor() {return m_color; }
 
         Vect getNormalAt(Vect point){
             // normal always points away from center of sphere
@@ -42,18 +42,19 @@ class Sphere : public Object {
             double sphere_center_z = sphere_center.getZ();
 
             double a = 1; //normalized
+
             double b = (2*(ray_origin_x - sphere_center_x)*ray_direction_x) + 
                        (2*(ray_origin_y - sphere_center_y)*ray_direction_y) + 
                        (2*(ray_origin_z - sphere_center_z)*ray_direction_z);
+
             double c = pow(ray_origin_x - sphere_center_x, 2) + 
                        pow(ray_origin_y - sphere_center_y, 2) +
-                       pow(ray_origin_z - sphere_center_z, 2);
+                       pow(ray_origin_z - sphere_center_z, 2) - (m_radius * m_radius);
 
             double discriminant = b*b - 4*c;
 
             if (discriminant > 0) {
                 // The ray intersectts the sphere
-                // he firat root (intersection)
                 double r1 = ((-1*b - sqrt(discriminant))/2) - 0.000001;
                 if (r1 > 0){
                     // The first root is the smallest positive root
@@ -78,8 +79,8 @@ Sphere::Sphere () {
     m_radius = 1.0;
 }
 
-Sphere::Sphere(Vect pos, double rad, Color col) {
-    m_center = pos;
+Sphere::Sphere(Vect center_pos, double rad, Color col) {
+    m_center = center_pos;
     m_color = col;
     m_radius = rad;
 }

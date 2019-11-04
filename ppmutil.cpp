@@ -25,6 +25,9 @@ void saveppm(const char *filename, int w, int h, PixelInfo *data){
     for(int i=0; i < area; i++){
         unsigned char r, g, b;
         pixel = data[i];
+        // Pixel color data is on range 0..1
+        // PPM should be converted to 0..255
+        pixel.multiply(255);
         pixel.clamp();
         r = static_cast<unsigned char>(pixel.r);
         g = static_cast<unsigned char>(pixel.g);
