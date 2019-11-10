@@ -23,7 +23,12 @@ class Vect {
     Vect normalize() {
         double magnitude = sqrt((m_x*m_x) + (m_y*m_y) + (m_z*m_z));
         // double magnitude = this->magnitude();
-        return Vect(m_x / magnitude, m_y / magnitude, m_z / magnitude);
+        if(magnitude != 0) {
+            return Vect(m_x / magnitude, m_y / magnitude, m_z / magnitude);
+        } else {
+            return Vect();
+        }
+        
     }
 
     Vect negative() {

@@ -22,7 +22,9 @@ void saveppm(const char *filename, int w, int h, PixelInfo *data){
     fileStream << headerStream.str();
 
     PixelInfo pixel;
-    for(int i=0; i < area; i++){
+    // PPM writes files in oposite direction
+    // so, writing loop runs backwards...
+    for(int i = area - 1; i >= 0; i--){
         unsigned char r, g, b;
         pixel = data[i];
         // Pixel color data is on range 0..1

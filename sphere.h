@@ -17,15 +17,16 @@ class Sphere : public Object {
 
         Vect getCenter() { return m_center; }
         double getRadius() {return m_radius; }
-        Color getColor() {return m_color; }
+        virtual Color getColor() {return m_color; }
 
-        Vect getNormalAt(Vect point){
+        virtual Vect getNormalAt(Vect point){
             // normal always points away from center of sphere
             Vect normal = point.add(m_center.negative()).normalize();
+            // std::cout << "X: " << normal.getX() << " Y: " << normal.getY() << " Z: " << normal.getZ() << std::endl;
             return normal;
         }
 
-        double findIntersection(Ray ray) {
+        virtual double findIntersection(Ray ray) {
             Vect ray_origin = ray.getOrigin();
             double ray_origin_x = ray_origin.getX();
             double ray_origin_y = ray_origin.getY();
@@ -61,28 +62,27 @@ class Sphere : public Object {
                     return r1;
                 } else {
                     // The second root is the positive root
-                    double r2 = ((sqrt(discriminant) - b) / 2) - 0.000001;
+                    //double r2 = ((sqrt(discriminant) - b) / 2) - 0.000001;
+                    double r2 = ((1*b - sqrt(discriminant))/2) - 0.000001;
                     return r2;
                 }
             } else {
                 // Ray missed the sphere
                 return -1;
             }
-
-
         }
 };
 
 Sphere::Sphere () {
     m_center = Vect(0.0, 0.0, 0.0);
-    m_color = Color(0.5, 0.5, 0.5, 0.0);
     m_radius = 1.0;
+    m_color = Color(0.5, 0.5, 0.5, 0.0);
 }
 
 Sphere::Sphere(Vect center_pos, double rad, Color col) {
     m_center = center_pos;
-    m_color = col;
     m_radius = rad;
+    m_color = col;
 }
 
 

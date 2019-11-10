@@ -19,6 +19,9 @@ class Object {
         virtual double findIntersection(Ray ray) {
             return 0;
         }
+        virtual Vect getNormalAt(Vect point) {
+            return Vect(0, 0, 0);
+        }
 };
 
 Object::Object () { }

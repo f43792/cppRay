@@ -17,7 +17,7 @@ class Plane : public Object {
         Plane(Vect, double, Color);
 
         Vect getNormal() { return m_normal;}
-        Color getColor() {return m_color;}
+        virtual Color getColor() {return m_color;}
         double getSize() {return m_distance;}
 
         Vect getNormalAt(Vect point) {
@@ -25,7 +25,7 @@ class Plane : public Object {
             return m_normal;
         }
 
-        double findIntersection(Ray ray) {
+        virtual double findIntersection(Ray ray) {
             Vect ray_direction = ray.getDirection();
 
             double a = ray_direction.dotProduct(m_normal);
